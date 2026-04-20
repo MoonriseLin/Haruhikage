@@ -17,7 +17,10 @@ class MyClient(botpy.Client):
         _log.info(f"robot 「{self.robot.name}」 on_ready!")
 
     async def on_at_message_create(self, message: Message):
-        _message = await message.reply(content=f"机器人{self.robot.name}收到你的@消息了: {message.content}")
+        reply_text = f"机器人{self.robot.name}收到你的@消息了: {message.content}"
+        _log.info(reply_text)
+        print(reply_text, flush=True)
+        _message = await message.reply(content=reply_text)
         await self.api.recall_message(message.channel_id, _message.get("id"), hidetip=True)
 
 
